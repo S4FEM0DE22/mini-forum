@@ -1,0 +1,150 @@
+/* Tailwind v4 syntax */
+@import "tailwindcss/preflight"; /* แทน @tailwind base */
+@tailwind utilities;             /* แทน @tailwind components + utilities */
+
+/* ===== Custom Root Styles ===== */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* theme color variables (match tailwind.config.js) */
+  --color-primary: #1D4ED8;
+  --color-primary-dark: #1E40AF;
+  --color-accent: #06B6D4;
+  --color-surface: #FFFFFF;
+  --color-muted: #6B7280;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Links ===== */
+a {
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--color-primary);
+}
+
+/* ===== Body ===== */
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* ===== Headings ===== */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+/* ===== Buttons ===== */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* ===== Light Mode ===== */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* ===== Optional: Tailwind Custom Layers ===== */
+@layer components {
+  /* ใส่ component ของคุณเองที่นี่ */
+}
+
+@layer utilities {
+  /* ใส่ utilities ของคุณเองที่นี่ */
+}
+
+/* ===== Frosted / Gradient Theme ===== */
+@layer components {
+  .app-bg {
+    /* flat subtle background tint using primary color */
+    background-color: rgba(29,78,216,0.03);
+  }
+
+  .page-panel {
+    margin: 1.5rem auto;
+    padding: 1.25rem;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 6px 20px rgba(2,6,23,0.35);
+    background-color: rgba(255,255,255,0.04);
+  }
+
+  .btn-gradient {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+  /* solid primary button background (no gradient) */
+  background-color: var(--color-primary);
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 10px rgba(29,78,216,0.12);
+    transition: transform .12s ease, filter .12s ease;
+  }
+  .btn-gradient:hover { transform: translateY(-1px); filter: brightness(1.05); }
+  .btn-gradient:active { transform: translateY(0); }
+
+  .tab-bar {
+    display: flex;
+    gap: .5rem;
+  background: transparent;
+    padding: .25rem;
+    border-radius: 10px;
+  }
+  .tab-bar .tab {
+    padding: .5rem .75rem;
+    border-radius: 8px;
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.04);
+  }
+  .tab-bar .tab.inactive { background: transparent; color: inherit; }
+
+  /* Light mode adjustments */
+  @media (prefers-color-scheme: light) {
+    .page-panel { background-color: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 6px 20px rgba(2,6,23,0.06); }
+    .btn-gradient { box-shadow: 0 6px 18px rgba(29,78,216,0.12); }
+    .tab-bar { background: rgba(29,78,216,0.06); }
+  }
+}

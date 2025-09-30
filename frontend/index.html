@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talking Room</title>
+    <script>
+      // Apply theme class early only when user explicitly set a preference in localStorage.
+      // Be tolerant of a few possible stored representations and avoid any system preference
+      // fallbacks so the user's explicit choice always wins on page load.
+      (function() {
+        try {
+          var saved = localStorage.getItem('darkMode');
+          // helper to read cookie
+          function getCookie(name) {
+            var v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+            return v ? v.pop() : null;
+          }
+
+          // Normalize a few common representations to a boolean
+          var isDark = false;
+          if (saved === 'true' || saved === '1' || saved === true || saved === 1) isDark = true;
+          if (!saved) {
+            // try cookie fallback (cookies are shared across ports on the same host)
+            var cookieVal = getCookie('darkMode');
+            if (cookieVal === 'true' || cookieVal === '1') isDark = true;
+            if (cookieVal === 'false' || cookieVal === '0') isDark = false;
+            // propagate to localStorage for this origin
+            if (cookieVal !== null) try { localStorage.setItem('darkMode', cookieVal); } catch (e) {}
+          }
+
+          if (isDark) document.documentElement.classList.add('dark');
+          else if (saved === 'false' || saved === '0' || saved === false || saved === 0) document.documentElement.classList.remove('dark');
+        } catch (e) {
+          // ignore - localStorage or cookies may be unavailable in some environments
+        }
+      })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#2563eb', // ตัวอย่างสีหลัก
+              secondary: '#9333ea',
+              accent: '#f59e42',
+            },
+            fontFamily: {
+              sans: ['Kanit', 'ui-sans-serif', 'system-ui'],
+            },
+          },
+        },
+      }
+    </script>
+  </head>
+  <body class="bg-gray-50">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
